@@ -1,14 +1,12 @@
 
 class ffmpeg3:
     name = "ffmpeg 3.2.2"
-    dirname = "ffmpeg-3.2.2" # leave empty to use filename prefixes (before the 1st dot)
-    baseurl = "http://ffmpeg.org/releases/"
-    filename = "ffmpeg-3.2.2.tar.bz2"
-    sha1 = ""   # leave empty if unknown
+    proto = "http"
+    url = "http://ffmpeg.org/releases/ffmpeg-3.2.2.tar.bz2"
+    dirname = "" # leave empty to auto guess
 
     def skip(self, prefix, force):
-        if force: return False;
-        if file_exist(prefix + "/bin/ffmpeg"): return True;
+        # always return False
         return False;
 
     # this is a special configuration for ffmpeg3!

@@ -1,9 +1,8 @@
 
 class yasm:
     name = "yasm 1.3.0"
-    dirname = "yasm-1.3.0"
-    baseurl = "http://www.tortall.net/projects/yasm/releases/"
-    filename = "yasm-1.3.0.tar.gz"
+    url = "http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz"
+    dirname = "" # leave empty to auto guess
     sha1 = "b7574e9f0826bedef975d64d3825f75fbaeef55e"   # leave empty if unknown
 
     def skip(self, prefix, force):
