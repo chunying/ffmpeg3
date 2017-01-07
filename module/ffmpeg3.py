@@ -8,6 +8,7 @@ class ffmpeg3:
 
     def skip(self, prefix, force):
         if force: return False;
+        if file_exist(prefix + "/bin/ffmpeg"): return True;
         return False;
 
     # this is a special configuration for ffmpeg3!

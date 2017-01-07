@@ -10,7 +10,11 @@ prefix = "/usr/local/ffmpeg3";
 make_opts = "-j10";
 force = False
 
+os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
+os.environ["PREFIX"] = prefix;
+
 execfile("module/yasm.py");
+execfile("module/lame.py");
 execfile("module/x264.py");
 execfile("module/ffmpeg3.py");
 
@@ -47,14 +51,21 @@ for d in deps:
 os.chdir(pwd);
 ff = ffmpeg3();
 print(highlight("### Process package {}".format(ff.name)));
+if ff.skip(prefix, force):
+    print(info("*** {} alreay installed, skipped".format(ff.name)));
+    sys.exit(0);
 filename = download(ff);
 unpack(filename);
 os.chdir("./build/" + ff.dirname);
+# built configure options
 opts = [ "--enable-gpl", "--enable-version3", "--enable-nonfree",
          "--enable-shared",
          "--enable-avresample" ];
 for d in deps:
     if hasattr(d, "ffmpeg_opts"): opts.extend(d.ffmpeg_opts);
+opts.append("--extra-cflags=-I{}/include".format(prefix));
+opts.append("--extra-ldflags=-L{}/lib".format(prefix));
+#
 ff.configure(prefix, opts);
 ff.make(make_opts);
 ff.install();
