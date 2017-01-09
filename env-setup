@@ -1,0 +1,4 @@
+#!/bin/sh
+export FFMPEG=/usr/local/ffmpeg3
+export PKG_CONFIG_PATH=$FFMPEG/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig
+export PATH=$FFMPEG/bin:$PATH
