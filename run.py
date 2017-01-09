@@ -5,18 +5,24 @@ import sys
 from tools import *
 from past.builtins import execfile
 
+DEFAULT_PREFIX = "/usr/local/ffmpeg3";
+
 deps = [];
-prefix = "/usr/local/ffmpeg3";
 make_opts = "-j10";
-force = False
+force = False;
+
+prefix = "";
+if 'FFMPEG' in os.environ.keys():
+    prefix = os.environ['FFMPEG'];
+else:
+    prefix = DEFAULT_PREFIX;
 
 os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
 os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
-os.environ["PREFIX"] = prefix;
 
 modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
-            "lame", "opus", "vorbis", "theora", "speex",
-            "vpx", "x264", "x265", "xvid" ];
+            "lame", "opus", "vorbis", "speex", "fdkaac",
+            "theora", "vpx", "x264", "x265", "xvid" ];
 for m in modules:
     execfile("module/{}.py".format(m));
 execfile("module/ffmpeg3.py");
