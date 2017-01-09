@@ -22,6 +22,7 @@ def guess_dirname(fn):
     if fn[-7:] == ".tar.gz":    return fn[0:-7];
     if fn[-7:] == ".tar.xz":    return fn[0:-7];
     if fn[-4:] == ".zip":       return fn[0:-4];
+    if fn[-4:] == ".git":       return fn;
     idx = fn.find(".");
     if idx < 0: return fn;
     return fn[:idx];
