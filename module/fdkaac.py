@@ -7,7 +7,7 @@ class fdkaac:
 
     def skip(self, prefix, force):
         if force: return False;
-        #if file_exist(prefix + "/bin/fdkaac"): return True;
+        if file_exist(prefix + "/include/fdk-aac/aacenc_lib.h"): return True;
         return False;
 
     def configure(self, prefix):
