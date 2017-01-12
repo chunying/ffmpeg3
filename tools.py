@@ -12,6 +12,9 @@ def error(msg):
 def info(msg):
     return "\x1b[1;33m" + msg + "\x1b[m";
 
+def ok(msg):
+    return "\x1b[1;32m" + msg + "\x1b[m";
+
 def errq(msg):
     print(error(msg));
     sys.exit(-1);
@@ -62,9 +65,13 @@ def verify_checksum(fn, checksum, alg):
 
 def download(pkg):
     fname = os.path.basename(pkg.url);
-    # clone from a remote repo?
+    # proto other than http and ftp?
     if hasattr(pkg, 'proto'):
-        if pkg.proto == "git":
+        if pkg.proto == "null":
+            if os.path.isdir("build/"+fname): runcmd("rm -rf 'build/{}'".format(fname));
+            os.mkdir("build/"+fname);
+            return fname;
+        elif pkg.proto == "git":
             if os.path.isdir("build/"+fname): runcmd("rm -rf 'build/{}'".format(fname));
             runcmd("git clone {} build/{}".format(pkg.url, fname));
             return fname;
