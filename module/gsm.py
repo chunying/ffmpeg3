@@ -8,7 +8,7 @@ class gsm:
 
     def skip(self, prefix, force):
         if force: return False;
-        #if file_exist(prefix + "/include/xxx/xxx.h"): return True;
+        if file_exist(prefix + "/include/gsm.h"): return True;
         return False;
 
     def configure(self, prefix):
