@@ -21,8 +21,9 @@ os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
 os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
 
 modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
-            "ladspa", "frei0r", "fribidi", "libass", "rtmp",
-            "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
+            "ladspa", "frei0r", "fribidi", "libass", "caca", "gsm",
+            "rtmp",
+            "celt", "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
             "openjpeg",
             "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
 print(ok("### {} module(s) activated".format(len(modules))));
