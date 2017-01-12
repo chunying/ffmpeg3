@@ -23,6 +23,7 @@ os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfi
 modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
             "rtmp",
             "lame", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
+            "openjpeg",
             "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
 for m in modules:
     execfile("module/{}.py".format(m));
