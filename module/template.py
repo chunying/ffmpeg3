@@ -1,9 +1,11 @@
 
 class RENAME:
-    name = ""   # [MANDATORY]
+    # mandatory fields
+    name = ""
+    url = ""
+    dirname = "" # leave empty to auto guess
+    # optional fields
     proto = ""  # http (default), ftp, or git
-    url = ""    # [MANDATORY]
-    dirname = "" # [MANDATORY] leave empty to auto guess
     sha1 = ""   # remove or leave empty if unknown
     md5 = ""    # remove or leave empty if unknown
     ffmpeg_opts = []
