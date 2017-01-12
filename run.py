@@ -21,8 +21,9 @@ os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
 os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
 
 modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
+            "rtmp",
             "lame", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
-            "theora", "vpx", "x264", "x265", "xvid" ];
+            "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
 for m in modules:
     execfile("module/{}.py".format(m));
 execfile("module/ffmpeg3.py");
