@@ -17,10 +17,10 @@ class x265:
         runcmd('cmake -DCMAKE_INSTALL_PREFIX:PATH={} -D CMAKE_CXX_FLAGS="-fPIC" -D CMAKE_C_FLAGS="-fPIC" ../../source'.format(prefix));
         os.chdir(cwd);
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make -C build/linux {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make -C build/linux install");
 
 deps.append(x265());

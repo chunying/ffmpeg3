@@ -17,10 +17,10 @@ class rtmp:
         runcmd("sed -e 's,prefix=/usr/local,prefix={},' Makefile.OLD > Makefile".format(prefix));
         runcmd("sed -e 's,prefix=/usr/local,prefix={},' librtmp/Makefile.OLD > librtmp/Makefile".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(rtmp());

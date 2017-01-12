@@ -16,10 +16,10 @@ class xvid:
         runcmd("./configure --prefix={}".format(prefix));
         os.chdir(cwd);
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make -C build/generic {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make -C build/generic install");
 
 deps.append(xvid());

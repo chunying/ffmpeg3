@@ -13,10 +13,10 @@ class sdl2_ttf:
         os.mkdir("mybuild");
         runcmd("cd mybuild; ../configure --prefix={} --with-pic".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make -C mybuild {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make -C mybuild install");
 
 deps.append(sdl2_ttf());

@@ -5,7 +5,7 @@ class RENAME:
     url = ""
     dirname = "" # leave empty to auto guess
     # optional fields
-    proto = ""  # http (default), ftp, or git
+    proto = ""  # http (default), ftp, git, or null
     sha1 = ""   # remove or leave empty if unknown
     md5 = ""    # remove or leave empty if unknown
     ffmpeg_opts = []
@@ -18,10 +18,10 @@ class RENAME:
     def configure(self, prefix):
         runcmd("./configure --prefix={}".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(RENAME());

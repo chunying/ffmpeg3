@@ -17,13 +17,13 @@ class openjpeg:
         runcmd("cmake -DCMAKE_INSTALL_PREFIX={} ..".format(prefix));
         os.chdir(cwd);
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         cwd = os.getcwd();
         os.chdir("build");
         runcmd("make {}".format(opts));
         os.chdir(cwd);
 
-    def install(self):
+    def install(self, prefix):
         cwd = os.getcwd();
         os.chdir("build");
         runcmd("make install");

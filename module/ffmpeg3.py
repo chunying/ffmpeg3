@@ -14,10 +14,10 @@ class ffmpeg3:
         optstr = " ".join(opts);
         runcmd("./configure --prefix={}".format(prefix) + " " +  optstr);
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 #deps.append(ffmpeg3());

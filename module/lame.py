@@ -13,10 +13,10 @@ class lame:
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic --enable-nasm".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(lame());

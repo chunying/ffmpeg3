@@ -14,10 +14,10 @@ class openh264:
     def configure(self, prefix):
         print(info("*** No need to run ./configure"));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make PREFIX={} {}".format(prefix, opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make PREFIX={} install".format(prefix));
 
 deps.append(openh264());

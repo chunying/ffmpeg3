@@ -1,16 +1,19 @@
 
-class ogg:
-    name = "libogg 1.3.2"
-    url = "http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.xz"
+class frei0r:
+    name = "frei0r 1.5.0"
+    proto = "git"
+    url = "https://github.com/dyne/frei0r.git"
     dirname = "" # leave empty to auto guess
+    ffmpeg_opts = [ "--enable-frei0r" ]
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/ogg/ogg.h"): return True;
+        if file_exist(prefix + "/lib/frei0r-1"): return True;
         return False;
 
     def configure(self, prefix):
-        runcmd("./configure --prefix={} --with-pic".format(prefix));
+        runcmd("./autogen.sh");
+        runcmd("./configure --prefix={}".format(prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
@@ -18,6 +21,6 @@ class ogg:
     def install(self, prefix):
         runcmd("make install");
 
-deps.append(ogg());
+deps.append(frei0r());
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

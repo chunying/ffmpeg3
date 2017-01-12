@@ -14,10 +14,10 @@ class vpx:
     def configure(self, prefix):
         runcmd("./configure --prefix={} --enable-shared --enable-pic".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(vpx());

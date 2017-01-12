@@ -13,10 +13,10 @@ class x264:
     def configure(self, prefix):
         runcmd("./configure --prefix={} --enable-static --enable-shared --enable-pic".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(x264());

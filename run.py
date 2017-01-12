@@ -21,10 +21,11 @@ os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
 os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
 
 modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
-            "rtmp",
-            "lame", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
+            "ladspa", "frei0r", "fribidi", "libass", "rtmp",
+            "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
             "openjpeg",
             "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
+print(ok("### {} module(s) activated".format(len(modules))));
 for m in modules:
     execfile("module/{}.py".format(m));
 execfile("module/ffmpeg3.py");
@@ -35,7 +36,7 @@ cwd = os.getcwd();
 
 for d in deps:
     os.chdir(cwd);
-    print(highlight("### Process package {}".format(d.name)));
+    print(highlight("### Process package: {}".format(d.name)));
 
     if len(d.dirname) == 0:
         d.dirname = guess_dirname(d.url);
@@ -53,8 +54,8 @@ for d in deps:
     unpack(filename);
     os.chdir(cwd + "/build/" + d.dirname);
     d.configure(prefix);
-    d.make(make_opts);
-    d.install();
+    d.make(prefix, make_opts);
+    d.install(prefix);
     os.chdir(cwd + "/build");
     cleanup(d);
 
@@ -79,8 +80,8 @@ opts.append("--extra-cflags=-I{}/include".format(prefix));
 opts.append("--extra-ldflags=-L{}/lib".format(prefix));
 #
 ff.configure(prefix, opts);
-ff.make(make_opts);
-ff.install();
+ff.make(prefix, make_opts);
+ff.install(prefix);
 os.chdir(cwd + "/build");
 cleanup(ff);
 

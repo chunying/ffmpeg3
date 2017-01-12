@@ -18,10 +18,10 @@ class webp:
                "--enable-libwebpdemux --enable-libwebpdecoder " +
                "--enable-libwebpextras");
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(webp());

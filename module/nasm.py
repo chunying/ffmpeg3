@@ -12,10 +12,10 @@ class nasm:
     def configure(self, prefix):
         runcmd("./configure --prefix {}".format(prefix));
 
-    def make(self, opts):
+    def make(self, prefix, opts):
         runcmd("make {}".format(opts));
 
-    def install(self):
+    def install(self, prefix):
         runcmd("make install");
 
 deps.append(nasm());
