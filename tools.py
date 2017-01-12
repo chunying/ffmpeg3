@@ -21,6 +21,8 @@ def guess_dirname(fn):
     if fn[-8:] == ".tar.bz2":   return fn[0:-8];
     if fn[-7:] == ".tar.gz":    return fn[0:-7];
     if fn[-7:] == ".tar.xz":    return fn[0:-7];
+    if fn[-4:] == ".tgz":       return fn[0:-4];
+    if fn[-4:] == ".tbz":       return fn[0:-4];
     if fn[-4:] == ".zip":       return fn[0:-4];
     if fn[-4:] == ".git":       return fn;
     idx = fn.find(".");
@@ -63,6 +65,7 @@ def download(pkg):
     # clone from a remote repo?
     if hasattr(pkg, 'proto'):
         if pkg.proto == "git":
+            if os.path.isdir("build/"+fname): runcmd("rm -rf 'build/{}'".format(fname));
             runcmd("git clone {} build/{}".format(pkg.url, fname));
             return fname;
     # regular file
@@ -84,6 +87,8 @@ def unpack(fn):
     if fn[-8:] == ".tar.bz2":   runcmd("tar xjf {} -C build/".format(fn));
     if fn[-7:] == ".tar.gz":    runcmd("tar xzf {} -C build/".format(fn));
     if fn[-7:] == ".tar.xz":    runcmd("xz -dc {} | tar xf - -C build/".format(fn));
+    if fn[-4:] == ".tbz":       runcmd("tar xjf {} -C build/".format(fn));
+    if fn[-4:] == ".tgz":       runcmd("tar xzf {} -C build/".format(fn));
     if fn[-4:] == ".zip":       runcmd("unzip {} -C build/".format(fn));
     # otherwise: do nothing
 
