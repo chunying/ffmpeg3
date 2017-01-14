@@ -1,5 +1,5 @@
 all:
-	@./run.py
+	@./ffbuild.py
 
 clean:
 	rm -rf build
