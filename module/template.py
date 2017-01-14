@@ -1,5 +1,7 @@
 
 class RENAME:
+    # class name SHOULD be equivalent to filename (without .py),
+    # so that the --rebuild option works for the module
     # mandatory fields
     name = ""
     url = ""
