@@ -62,45 +62,27 @@ create_dir("./build");
 cwd = os.getcwd();
 
 for d in deps:
-    myname = type(d).__name__;
     os.chdir(cwd);
-    print(highlight("### Process module {} ".format(d.name)), end='');
-
-    if len(d.dirname) == 0:
-        d.dirname = guess_dirname(d.url);
-        print(ok("[{}*] ".format(d.dirname)), end='');
-    else:
-        print(ok("[{}] ".format(d.dirname)), end='');
-
-    if len(d.dirname) == 0 or d.dirname.find("/") != -1:
-        print('... ' + error("Bad directory name: {}", d.dirname));
-        sys.exit(-1);
-
+    myname = type(d).__name__;
     if myname not in rebuild and d.skip(prefix, force):
-        print('... ' + info("skipped"));
-        continue;
-
-    print('...');
-
-    filename = download(d);
-    unpack(filename);
-    os.chdir(cwd + "/build/" + d.dirname);
-    d.configure(prefix);
-    d.make(prefix, make_opts);
-    d.install(prefix);
-    os.chdir(cwd + "/build");
-    cleanup(d);
-    modules_built = modules_built + 1;
+        print(info("--- Package {} skipped".format(d.name)));
+        continue
+    try: 
+        if install(d, cwd, prefix, make_opts):
+            modules_built = modules_built + 1;
+    except:
+        print(err("*** Install package {} ({}) failed".format(myname, d.name)));
+        sys.exit(-3);
 
 # build and install ffmpeg3
-os.chdir(cwd);
 ff = ffmpeg3();
-
+os.chdir(cwd);
 myname = type(ff).__name__;
-print(highlight("### Process package {} ({}) ".format(myname, ff.name)), end='');
 if modules_built == 0 and myname not in rebuild and ff.skip(prefix, force):
-    print('... ' + info("skipped"));
+    print(info("--- Package {} skipped".format(ff.name)));
     sys.exit(0);
+
+print(highlight("### Process package {} ({}) ".format(myname, ff.name)), end='');
 if len(ff.dirname) == 0: ff.dirname = guess_dirname(ff.url);
 print(ok("[{}] ".format(ff.dirname)) + '...');
 

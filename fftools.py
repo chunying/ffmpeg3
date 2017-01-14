@@ -128,4 +128,31 @@ def cleanup(pkg):
     else:
         runcmd(ccmd);
 
+def install(pkg, workdir, prefix, make_opts):
+    os.chdir(workdir);
+    print(highlight("### Process module {} ".format(pkg.name)), end='');
+
+    if len(pkg.dirname) == 0:
+        pkg.dirname = guess_dirname(pkg.url);
+        print(ok("[{}*] ".format(pkg.dirname)), end='');
+    else:
+        print(ok("[{}] ".format(pkg.dirname)), end='');
+
+    if len(pkg.dirname) == 0 or pkg.dirname.find("/") != -1:
+        print('... ' + error("Bad directory name: {}", pkg.dirname));
+        sys.exit(-1);
+
+    print("...");
+
+    filename = download(pkg);
+    unpack(filename);
+    os.chdir(workdir + "/build/" + pkg.dirname);
+    pkg.configure(prefix);
+    pkg.make(prefix, make_opts);
+    pkg.install(prefix);
+    os.chdir(workdir + "/build");
+    cleanup(pkg);
+
+    return True
+
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
