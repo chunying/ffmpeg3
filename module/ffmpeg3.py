@@ -6,7 +6,7 @@ class ffmpeg3:
     dirname = "" # leave empty to auto guess
 
     def skip(self, prefix, force):
-        # always return False
+        if file_exist(prefix + "/bin/ffmpeg"): return True;
         return False;
 
     # this is a special configuration for ffmpeg3!
