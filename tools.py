@@ -8,7 +8,8 @@ all_modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
             "rtmp",
             "celt", "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
             "openjpeg",
-            "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
+            "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid",
+            "live555" ];
 
 def highlight(msg):
     return "\x1b[1m" + msg + "\x1b[m";
