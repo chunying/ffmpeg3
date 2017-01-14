@@ -3,6 +3,13 @@ import errno
 import sys
 import os
 
+all_modules = [ "yasm", "nasm", "sdl2", "sdl2_ttf",
+            "ladspa", "frei0r", "fribidi", "libass", "caca", "gsm", "modplug",
+            "rtmp",
+            "celt", "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
+            "openjpeg",
+            "webp", "theora", "vpx", "x264", "openh264", "x265", "xvid" ];
+
 def highlight(msg):
     return "\x1b[1m" + msg + "\x1b[m";
 
@@ -18,6 +25,20 @@ def ok(msg):
 def errq(msg):
     print(error(msg));
     sys.exit(-1);
+
+def usage():
+    print("""Options:
+  -h, --help: Show this message
+   --prefix=: Specify prefix directory
+  --modules=: Build and install selected modules. Separate modules using commas
+     --make=: Additional make options
+    --force=: Rebuild all modules
+  --rebuild=: Rebuild selected modules""");
+
+def dump_modules(msg, mods):
+    print(highlight(msg), end='');
+    print(" ".join(mods));
+    print(ok("### {} module(s) activated".format(len(mods))));
 
 def guess_dirname(fn):
     fn = os.path.basename(fn);
