@@ -12,7 +12,7 @@ class caca:
         return False;
 
     def configure(self, prefix):
-        runcmd("./configure --prefix={} --disable-python --disable-java".format(prefix));
+        runcmd("./configure --prefix={} --disable-python --disable-ruby --disable-java --disable-doc".format(prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
