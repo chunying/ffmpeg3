@@ -3,7 +3,7 @@
 import os
 import sys
 import getopt
-from tools import *
+from fftools import *
 from past.builtins import execfile
 
 DEFAULT_PREFIX = "/usr/local/ffmpeg3";
