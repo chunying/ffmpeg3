@@ -28,12 +28,12 @@ def errq(msg):
 
 def usage():
     print("""Options:
-  -h, --help: Show this message
-   --prefix=: Specify prefix directory
-  --modules=: Build and install selected modules. Separate modules using commas
-     --make=: Additional make options
-    --force=: Rebuild all modules
-  --rebuild=: Rebuild selected modules""");
+    -h, --help                 Show this message
+    --prefix [prefix]          Specify prefix directory
+    --modules [module[,...]]   Build and install selected modules
+    --make [options]           Additional make options
+    --force                    Rebuild all modules
+    --rebuild [module[,...]]   Rebuild selected modules""");
 
 def dump_modules(msg, mods):
     print(highlight(msg), end='');
