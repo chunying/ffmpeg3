@@ -11,7 +11,7 @@ class theora:
         return False;
 
     def configure(self, prefix):
-        runcmd("./configure --prefix={} --with-pic".format(prefix));
+        runcmd("./configure --prefix={} --with-pic --disable-examples".format(prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
