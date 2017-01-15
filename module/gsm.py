@@ -15,7 +15,7 @@ class gsm:
         runcmd("cp -f Makefile Makefile.OLD");
         runcmd("sed -e 's,^INSTALL_ROOT.*,INSTALL_ROOT = "+prefix+",'"
                 + " -e 's,^GSM_INSTALL_INC.*,GSM_INSTALL_INC = $(GSM_INSTALL_ROOT)/include,'"
-                + " -e 's,^CCFLAGS.*,CCFLAGS = -c -O2 -DNeedFunctionPrototypes=1 -fPIC,'"
+                + " -e 's,^CCFLAGS.*,& -fPIC,'"
                 + " -e 's,^RMFLAGS.*,RMFLAGS = -f,'"
                 + " -e 's,-rm $@,-rm -f $@,g'"
                 + " Makefile.OLD > Makefile");
