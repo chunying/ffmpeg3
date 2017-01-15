@@ -3,6 +3,7 @@
 import os
 import sys
 import getopt
+import platform
 from fftools import *
 from past.builtins import execfile
 
@@ -70,8 +71,9 @@ for d in deps:
     try: 
         if install(d, cwd, prefix, make_opts):
             modules_built = modules_built + 1;
-    except:
-        print(err("*** Install package {} ({}) failed".format(myname, d.name)));
+    except Exception as e:
+        print(error("*** Install package {} ({}) failed".format(myname, d.name)));
+        print(str(e));
         sys.exit(-3);
 
 # build and install ffmpeg3
