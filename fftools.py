@@ -3,7 +3,9 @@ import errno
 import sys
 import os
 
-all_modules = [ "yasm", "nasm", "openssl", "sdl2", "sdl2_ttf",
+all_modules = [ "yasm", "nasm",
+	    "gpg_error", "gcrypt", "nettle", "gmplib", "gnutls",
+	    "sdl2", "sdl2_ttf",
             "ladspa", "frei0r", "fribidi", "libass", "caca", "gsm", "modplug",
             "rtmp",
             "celt", "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
