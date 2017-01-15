@@ -10,7 +10,7 @@ class nettle:
         return False;
 
     def configure(self, prefix):
-        runcmd("./configure --prefix={}".format(prefix));
+        runcmd("./configure --prefix={} --enable-mini-gmp".format(prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
