@@ -11,7 +11,7 @@ class gnutls:
         return False;
 
     def configure(self, prefix):
-        runcmd("GMP_CFLAGS='-I{}/include' GMP_LIBS='-L{}/lib' ./configure --prefix={} --without-nettle-mini --with-included-libtasn1 --with-included-unistring --without-p11-kit".format(prefix, prefix, prefix));
+        runcmd("GMP_CFLAGS='-I{}/include' GMP_LIBS='-L{}/lib -lgmp' ./configure --prefix={} --without-nettle-mini --with-included-libtasn1 --with-included-unistring --without-p11-kit".format(prefix, prefix, prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
