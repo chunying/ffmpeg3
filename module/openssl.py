@@ -11,7 +11,9 @@ class openssl:
         return False;
 
     def configure(self, prefix):
-        runcmd("./config --prefix={} --openssldir={}/ssl".format(prefix, prefix));
+        runcmd("./config --prefix={} --openssldir={}/ssl".format(prefix, prefix)
+	             + " enable-heartbeats enable-weak-ssl-ciphers"
+		     + " enable-md2 enable-rc5 zlib");
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
