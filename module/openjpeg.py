@@ -12,7 +12,7 @@ class openjpeg:
 
     def configure(self, prefix):
         cwd = os.getcwd();
-        runcmd("mkdir build");
+        runcmd("mkdir -p build");
         os.chdir("build");
         runcmd("cmake -DCMAKE_INSTALL_PREFIX={} ..".format(prefix));
         os.chdir(cwd);
