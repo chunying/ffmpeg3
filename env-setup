@@ -1,4 +1,13 @@
 #!/bin/sh
-export FFMPEG=/usr/local/ffmpeg3
+
+SYSNAME=`uname -s`
+PREFIX=/usr/local/ffmpeg3
+
+export FFMPEG=$PREFIX
 export PKG_CONFIG_PATH=$FFMPEG/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig
 export PATH=$FFMPEG/bin:$PATH
+
+if [ "$SYSNAME" == "Darwin" ]; then
+	export DYLD_LIBRARY_PATH=$PREFIX/lib
+fi
+
