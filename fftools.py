@@ -39,13 +39,15 @@ def errq(msg):
     sys.exit(-1);
 
 def usage():
-    print("""Options:
+    print("""
+Options:
     -h, --help                 Show this message
     --prefix [prefix]          Specify prefix directory
     --modules [module[,...]]   Build and install selected modules
     --make [options]           Additional make options
     --force                    Rebuild all modules
-    --rebuild [module[,...]]   Rebuild selected modules""");
+    --rebuild [module[,...]]   Rebuild selected modules
+""");
 
 def dump_modules(msg, mods):
     print(highlight(msg), end='');
