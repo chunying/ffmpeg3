@@ -120,7 +120,7 @@ def unpack(fn):
     if fn[-7:] == ".tar.xz":    runcmd("xz -dc {} | tar xf - -C build/".format(fn));
     if fn[-4:] == ".tbz":       runcmd("tar xjf {} -C build/".format(fn));
     if fn[-4:] == ".tgz":       runcmd("tar xzf {} -C build/".format(fn));
-    if fn[-4:] == ".zip":       runcmd("unzip {} -C build/".format(fn));
+    if fn[-4:] == ".zip":       runcmd("unzip {} -d build/".format(fn));
     # otherwise: do nothing
 
 def cleanup(pkg):
