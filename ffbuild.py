@@ -49,9 +49,9 @@ for x in opts:
     elif optname == "--rebuild": rebuild = optarg.split(",");
 
 print(info("prefix [{}], make [{}], force={}".format(prefix, make_opts, "true" if force else "false")));
-if len(modules) > 0: dump_modules("Activated modules:", modules);
-else:                dump_modules("Available modules:", all_modules);
-if len(rebuild) > 0: dump_modules("Rebuild modules:", rebuild);
+if len(modules) > 0: dump_modules("Activated modules: ", modules);
+else:                dump_modules("Available modules: ", all_modules);
+if len(rebuild) > 0: dump_modules("Rebuild modules: ", rebuild);
 
 # start build and install
 for m in modules:
@@ -66,7 +66,7 @@ for d in deps:
     os.chdir(cwd);
     myname = type(d).__name__;
     if myname not in rebuild and d.skip(prefix, force):
-        print(info("--- Package {} skipped".format(d.name)));
+        print(info("--- Package {} ({}) skipped".format(myname, d.name)));
         continue
     try: 
         if install(d, cwd, prefix, make_opts):
@@ -82,7 +82,7 @@ os.chdir(cwd);
 myname = type(ff).__name__;
 if modules_built == 0 and myname not in rebuild and ff.skip(prefix, force):
     runcmd("cp -f env-setup {}/".format(prefix));
-    print(info("--- Package {} skipped".format(ff.name)));
+    print(info("--- Package {} ({}) skipped".format(myname, ff.name)));
     sys.exit(0);
 
 print(highlight("### Process package {} ({}) ".format(myname, ff.name)), end='');
