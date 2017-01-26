@@ -4,6 +4,10 @@ class nasm:
     url = "http://www.nasm.us/pub/nasm/releasebuilds/2.12.02/nasm-2.12.02.tar.xz"
     dirname = "" # leave empty to auto guess
 
+    def has_builtin(self):
+        if which("nasm") != None: return which("nasm");
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/bin/nasm"): return True;

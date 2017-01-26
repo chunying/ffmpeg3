@@ -6,6 +6,10 @@ class caca:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libcaca" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/caca.h'): return '/usr/local/include/caca.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/caca.h"): return True;

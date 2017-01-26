@@ -5,6 +5,10 @@ class xvid:
     dirname = "xvidcore" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libxvid" ];
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/xvid.h'): return '/usr/local/include/xvid.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/xvid.h"): return True;

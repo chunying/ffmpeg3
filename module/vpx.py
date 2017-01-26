@@ -6,6 +6,10 @@ class vpx:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libvpx" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/vpx/vp8.h'): return '/usr/local/include/vpx/vp8.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/vpx/vp8.h"): return True;

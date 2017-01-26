@@ -4,6 +4,10 @@ class sdl2_ttf:
     url = "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz"
     dirname = "" # leave empty to auto guess
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/SDL2/SDL_ttf.h'): return '/usr/local/include/SDL2/SDL_ttf.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/SDL2/SDL_ttf.h"): return True;

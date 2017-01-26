@@ -5,6 +5,10 @@ class lame:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libmp3lame" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/lame/lame.h'): return "/usr/local/include/lame/lame.h";
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/bin/lame"): return True;

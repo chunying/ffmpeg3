@@ -12,6 +12,10 @@ class RENAME:
     md5 = ""    # remove or leave empty if unknown
     ffmpeg_opts = []
 
+    def has_builtin(self):
+        #if file_exist('/usr/local/include/xxx.h'): return '/usr/local/include/xxx.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         #if file_exist(prefix + "/include/xxx/xxx.h"): return True;

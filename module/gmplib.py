@@ -4,6 +4,10 @@ class gmplib:
     url = "https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz"
     dirname = "" # leave empty to auto guess
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/gmp.h'): return "/usr/local/include/gmp.h";
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/gmp.h"): return True;

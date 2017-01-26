@@ -5,6 +5,10 @@ class opus:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libopus" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/opus/opus.h'): return '/usr/local/include/opus/opus.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/opus/opus.h"): return True;

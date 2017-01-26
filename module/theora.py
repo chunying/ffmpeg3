@@ -5,6 +5,10 @@ class theora:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libtheora" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/theora/theora.h'): return '/usr/local/include/theora/theora.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/theora/theora.h"): return True;

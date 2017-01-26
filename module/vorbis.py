@@ -5,6 +5,10 @@ class vorbis:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libvorbis" ]
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/vorbis/vorbisenc.h'): return '/usr/local/include/vorbis/vorbisenc.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/vorbis/vorbisenc.h"): return True;

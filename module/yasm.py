@@ -5,6 +5,10 @@ class yasm:
     dirname = "" # leave empty to auto guess
     sha1 = "b7574e9f0826bedef975d64d3825f75fbaeef55e"   # leave empty if unknown
 
+    def has_builtin(self):
+        if which("yasm") != None: return which("yasm");
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/bin/yasm"): return True;

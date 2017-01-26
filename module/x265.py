@@ -6,6 +6,10 @@ class x265:
     md5 = "36161843a70e4d46af1fa38cf221d0f3"    # leave empty if unknown
     ffmpeg_opts = [ "--enable-libx265" ];
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/x265.h'): return '/usr/local/include/x265.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/x265.h"): return True;

@@ -33,14 +33,14 @@ try:
 except getopt.GetoptError as e:
     print(error("Bad option: " + str(e)));
     usage();
-    dump_modules(all_modules);
+    dump_modules("Available modules:\n", all_modules);
     sys.exit(2);
 
 for x in opts:
     optname, optarg = x;
     if optname == "-h" or optname == "--help":
         usage();
-        dump_modules(all_modules);
+        dump_modules("Available modules:\n", all_modules);
         sys.exit(0);
     elif optname == "--prefix":  prefix = optarg;
     elif optname == "--force":   force = True;
@@ -65,6 +65,9 @@ cwd = os.getcwd();
 for d in deps:
     os.chdir(cwd);
     myname = type(d).__name__;
+    if hasattr(d, 'has_builtin') and d.has_builtin() != None:
+        print(green("[built-in] ") + "Package {} ... {}".format(myname, d.has_builtin()));
+        continue;
     if myname not in rebuild and d.skip(prefix, force):
         print(info("--- Package {} ({}) skipped".format(myname, d.name)));
         continue
@@ -107,6 +110,7 @@ ff.install(prefix);
 os.chdir(cwd + "/build");
 cleanup(ff);
 
+os.chdir(cwd);
 runcmd("cp -f env-setup {}/".format(prefix));
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

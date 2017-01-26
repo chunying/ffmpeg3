@@ -5,6 +5,10 @@ class x264:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libx264" ];
 
+    def has_builtin(self):
+        if file_exist('/usr/local/include/x264.h'): return '/usr/local/include/x264.h';
+        return None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/x264.h"): return True;
