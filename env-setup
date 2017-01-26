@@ -8,6 +8,10 @@ export PKG_CONFIG_PATH=$FFMPEG/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i
 export PATH=$FFMPEG/bin:$PATH
 
 if [ "$SYSNAME" == "Darwin" ]; then
-	export DYLD_LIBRARY_PATH=$PREFIX/lib
+	if [ -z "$DYLD_LIBRARY_PATH" ]; then
+		export DYLD_LIBRARY_PATH=$PREFIX/lib
+	else
+		export DYLD_LIBRARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
+	fi
 fi
 
