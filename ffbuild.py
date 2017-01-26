@@ -81,6 +81,7 @@ ff = ffmpeg3();
 os.chdir(cwd);
 myname = type(ff).__name__;
 if modules_built == 0 and myname not in rebuild and ff.skip(prefix, force):
+    runcmd("cp -f env-setup {}/".format(prefix));
     print(info("--- Package {} skipped".format(ff.name)));
     sys.exit(0);
 
@@ -105,5 +106,7 @@ ff.make(prefix, make_opts);
 ff.install(prefix);
 os.chdir(cwd + "/build");
 cleanup(ff);
+
+runcmd("cp -f env-setup {}/".format(prefix));
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
