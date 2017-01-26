@@ -16,14 +16,23 @@ all_modules = [ "yasm", "nasm",
 def highlight(msg):
     return "\x1b[1m" + msg + "\x1b[m";
 
-def error(msg):
+def red(msg):
     return "\x1b[1;31m" + msg + "\x1b[m";
 
-def info(msg):
+def yellow(msg):
     return "\x1b[1;33m" + msg + "\x1b[m";
 
-def ok(msg):
+def green(msg):
     return "\x1b[1;32m" + msg + "\x1b[m";
+
+def error(msg):
+    return red(msg);
+
+def info(msg):
+    return yellow(msg);
+
+def ok(msg):
+    return green(msg);
 
 def errq(msg):
     print(error(msg));
@@ -67,6 +76,22 @@ def file_exist(fn):
     except Exception as e:
         return False;
     return True;
+
+def is_exe(fpath):
+    return os.path.isfile(fpath) and os.access(fpath, os.X_OK);
+
+def which(program):
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            path = path.strip('"')
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+    return None
 
 def runcmd(cmd):
     ret = os.system(cmd);
