@@ -103,7 +103,7 @@ os.chdir(cwd + "/build/" + ff.dirname);
 # built configure options
 opts = [ "--enable-gpl", "--enable-version3", "--enable-nonfree",
          "--enable-shared",
-         "--enable-avresample", "--enable-openssl" ];
+         "--enable-avresample", "--enable-gnutls" ];
 for d in deps:
     if hasattr(d, "ffmpeg_opts"): opts.extend(d.ffmpeg_opts);
 opts.append("--extra-cflags=-I{}/include".format(prefix));
