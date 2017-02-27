@@ -15,6 +15,7 @@ class sdl2:
         return False;
 
     def configure(self, prefix):
+        runcmd("rm -rf mybuild");
         os.mkdir("mybuild");
         runcmd("cd mybuild; ../configure --prefix={} --with-pic".format(prefix));
 
