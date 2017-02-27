@@ -2,11 +2,11 @@ import hashlib
 import errno
 import sys
 import os
+import subprocess
 
-all_modules = [ "yasm", "nasm",
-            "gpg_error", "gcrypt", "gmplib", "nettle", "gnutls",
+all_modules = [ "yasm", "nasm", "gpg_error", "gcrypt",
             "sdl2", "sdl2_ttf",
-            "ladspa", "frei0r", "fribidi", "libass", "caca", "gsm", "modplug",
+            "ladspa", "frei0r", "fribidi", "harfbuzz", "libass", "caca", "gsm", "modplug",
             "rtmp",
             "celt", "lame", "ogg", "opus", "vorbis", "speex", "fdkaac", "twolame", "wavpack",
             "openjpeg",
@@ -95,12 +95,56 @@ def which(program):
                 return exe_file
     return None
 
+def runcmd_noquit(cmd):
+    return os.system(cmd);
+
 def runcmd(cmd):
-    ret = os.system(cmd);
+    ret = runcmd_noquit(cmd);
     if ret != 0:
         print(error("*** command '{}' failed with code {}".format(cmd, ret)));
         print(error("*** working directory: {}".format(os.getcwd())));
         sys.exit(-1)
+
+def runcmd_output(cmd):
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    (out, err) = proc.communicate()
+    return out.decode('utf-8').strip();
+
+def pkg_config_reset():
+    p = "/opt/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
+    os.environ["PKG_CONFIG_PATH"] = p;
+    return p;
+
+def pkg_config_setup(prefix):
+    os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:" + pkg_config_reset();
+
+def pkg_config_exists(pkg):
+    return True if runcmd_noquit("pkg-config --exists {}".format(pkg)) == 0 else False;
+
+def pkg_config_version(pkg):
+    if pkg_config_exists(pkg):
+        return runcmd_output("pkg-config --modversion {}".format(pkg));
+    return "[unknown version]";
+
+def pkg_config_builtin(pkg):
+    ret = None
+    pkg_config_reset()
+    if pkg_config_exists(pkg): ret = pkg_config_version(pkg);
+    pkg_config_setup(os.environ["FFMPEG3"]);
+    return ret;
+
+def sysdeps_check(sysdeps):
+    for d in sysdeps:
+        red("Test {}".format(d));
+        if pkg_config_exists(d[0]) == False:
+            print(red("Package '{}' not found!".format(d[0])));
+            return False
+        ver = pkg_config_version(d[0])
+        if d[1] == None:
+            print(green("Package {} [{}] found.".format(d[0], ver)));
+            continue;
+        # TODO: compare version
+    return True
 
 def verify_checksum(fn, checksum, alg):
     m = None;

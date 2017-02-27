@@ -8,10 +8,24 @@ Python FFmpeg build scripts
 - Python3 future package: pip3 install future
 - Compilers: gcc, g++
 - make and cmake
+- m4, autoconf, libtool
+- freetype6-dev (libfrei0r)
+- libfontconfig1-dev (libass)
 
-# Simplest Usage
+# Quick Start Guide
 
-- Run `make` or `./ffbuild.py` in the directory, and all files will be installed in **/usr/local/ffmpeg3**
-- (optionally) copy `env-setup` to **/usr/local/ffmpeg3**
-- (on Linux) add **/usr/local/ffmpeg3/lib** to ldconfig search path
-- merge `env-setup` into your environemnt, and have fun!
+- Choose your installation prefix (`$PREFIX`), the default is **/usr/local/ffmpeg**
+- [optional] Run `./ffbuild.py -h` to see more options
+- Run `make` or `./ffbuild.py` in the directory, and all files will be installed in `$PREFIX`
+- Edit `env-setup` to setup your `$PREFIX`
+- Copy `env-setup` to `$PREFIX`
+- [on Linux] Add `$PREFIX` to ldconfig search path
+
+# Usage
+
+- Merge `env-setup` into your environment, and have fun!
+
+# Note
+
+- If you are working with MSYS2, install msys/python3 instead of those in mingw\* repositories
+

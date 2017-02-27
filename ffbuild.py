@@ -19,8 +19,13 @@ prefix = "";
 if 'FFMPEG' in os.environ.keys(): prefix = os.environ['FFMPEG'];
 else:                             prefix = DEFAULT_PREFIX;
 
+os.environ["FFMPEG3"] = prefix;
 os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
-os.environ["PKG_CONFIG_PATH"] = prefix + "/lib/pkgconfig:/opt/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
+pkg_config_setup(prefix);
+
+# check fundamental system-wide dependencies
+sysdeps = [ ("gnutls", None), ("libssl", None) ]
+if sysdeps_check(sysdeps) == False: sys.exit(1);
 
 modules = all_modules; # all_modules defined in tools.py
 

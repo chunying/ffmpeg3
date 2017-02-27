@@ -7,13 +7,11 @@ class caca:
     ffmpeg_opts = [ "--enable-libcaca" ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/caca.h'): return '/usr/local/include/caca.h';
-        return None;
+        return pkg_config_builtin("caca");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/caca.h"): return True;
-        return False;
+        return pkg_config_exists("caca");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --disable-python --disable-ruby --disable-java --disable-doc".format(prefix));
