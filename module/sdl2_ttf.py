@@ -5,13 +5,12 @@ class sdl2_ttf:
     dirname = "" # leave empty to auto guess
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/SDL2/SDL_ttf.h'): return '/usr/local/include/SDL2/SDL_ttf.h';
+        return pkg_config_builtin("SDL2_ttf");
         return None;
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/SDL2/SDL_ttf.h"): return True;
-        return False;
+        return pkg_config_exists("SDL2_ttf");
 
     def configure(self, prefix):
         runcmd("rm -rf mybuild");

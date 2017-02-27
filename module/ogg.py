@@ -5,13 +5,12 @@ class ogg:
     dirname = "" # leave empty to auto guess
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/ogg/ogg.h'): return '/usr/local/include/ogg/ogg.h';
+        return pkg_config_builtin("ogg");
         return None;
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/ogg/ogg.h"): return True;
-        return False;
+        return pkg_config_exists("ogg");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic".format(prefix));

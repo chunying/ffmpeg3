@@ -6,10 +6,12 @@ class frei0r:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-frei0r" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("frei0r");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/lib/frei0r-1"): return True;
-        return False;
+        return pkg_config_exists("frei0r");
 
     def configure(self, prefix):
         runcmd("./autogen.sh");

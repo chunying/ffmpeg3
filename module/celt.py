@@ -6,10 +6,12 @@ class celt:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libcelt" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("celt");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/bin/celtenc"): return True;
-        return False;
+        return pkg_config_exists("celt");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={}".format(prefix));

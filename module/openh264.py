@@ -7,13 +7,11 @@ class openh264:
     ffmpeg_opts = [ "--enable-libopenh264 " ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/wels/codec_api.h'): return '/usr/local/include/wels/codec_api.h';
-        return None;
+        return pkg_config_builtin("openh264");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/wels/codec_api.h"): return True;
-        return False;
+        return pkg_config_exists("openh264");
 
     def configure(self, prefix):
         print(info("*** No need to run ./configure"));

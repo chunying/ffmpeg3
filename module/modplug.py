@@ -6,10 +6,12 @@ class modplug:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libmodplug" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("libmodplug");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/libmodplug/modplug.h"): return True;
-        return False;
+        return pkg_config_exists("libmodplug");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={}".format(prefix));

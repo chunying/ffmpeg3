@@ -5,10 +5,12 @@ class wavpack:
     dirname = "WavPack-5.0.0"
     ffmpeg_opts = [ "--enable-libwavpack" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("wavpack");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/bin/wavpack"): return True;
-        return False;
+        return pkg_config_exists("wavpack");
 
     def configure(self, prefix):
         runcmd("./autogen.sh");

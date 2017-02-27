@@ -6,13 +6,11 @@ class theora:
     ffmpeg_opts = [ "--enable-libtheora" ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/theora/theora.h'): return '/usr/local/include/theora/theora.h';
-        return None;
+        return pkg_config_builtin("theora");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/theora/theora.h"): return True;
-        return False;
+        return pkg_config_exists("theora");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic --disable-examples".format(prefix));

@@ -6,10 +6,12 @@ class twolame:
     dirname = "";
     ffmpeg_opts = [ "--enable-libtwolame" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("twolame");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/twolame.h"): return True;
-        return False;
+        return pkg_config_exists("twolame");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={}".format(prefix));

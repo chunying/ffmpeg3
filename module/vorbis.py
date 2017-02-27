@@ -6,13 +6,11 @@ class vorbis:
     ffmpeg_opts = [ "--enable-libvorbis" ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/vorbis/vorbisenc.h'): return '/usr/local/include/vorbis/vorbisenc.h';
-        return None;
+        return pkg_config_builtin("vorbis");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/vorbis/vorbisenc.h"): return True;
-        return False;
+        return pkg_config_exists("vorbis");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic".format(prefix));

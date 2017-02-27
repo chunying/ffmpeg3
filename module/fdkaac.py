@@ -5,10 +5,12 @@ class fdkaac:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libfdk-aac" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("fdk-aac");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/fdk-aac/aacenc_lib.h"): return True;
-        return False;
+        return pkg_config_exists("fdk-aac");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic".format(prefix));

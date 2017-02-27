@@ -5,10 +5,12 @@ class libass:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libass" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("libass");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/ass/ass.h"): return True;
-        return False;
+        return pkg_config_exists("libass");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={}".format(prefix));

@@ -6,10 +6,12 @@ class rtmp:
     dirname = "";
     ffmpeg_opts = [ "--enable-librtmp" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("librtmp");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/bin/rtmpdump"): return True;
-        return False;
+        return pkg_config_exists("librtmp");
 
     def configure(self, prefix):
         sed = (("sed -e 's,prefix=/usr/local,prefix={},' "

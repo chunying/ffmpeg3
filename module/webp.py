@@ -6,10 +6,12 @@ class webp:
     dirname = "" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libwebp " ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("libwebp");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/webp/encode.h"): return True;
-        return False;
+        return pkg_config_exists("libwebp");
 
     def configure(self, prefix):
         runcmd("./autogen.sh");

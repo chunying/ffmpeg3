@@ -6,13 +6,11 @@ class sdl2:
     ffmpeg_opts = []
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/SDL2/SDL.h'): return '/usr/local/include/SDL2/SDL.h';
-        return None;
+        return pkg_config_builtin("sdl2");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/SDL2/SDL.h"): return True;
-        return False;
+        return pkg_config_exists("sdl2");
 
     def configure(self, prefix):
         runcmd("rm -rf mybuild");

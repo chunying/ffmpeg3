@@ -6,13 +6,11 @@ class x264:
     ffmpeg_opts = [ "--enable-libx264" ];
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/x264.h'): return '/usr/local/include/x264.h';
-        return None;
+        return pkg_config_builtin("x264");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/x264.h"): return True;
-        return False;
+        return pkg_config_exists("x264");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --enable-static --enable-shared --enable-pic".format(prefix));

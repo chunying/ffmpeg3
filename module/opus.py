@@ -6,13 +6,11 @@ class opus:
     ffmpeg_opts = [ "--enable-libopus" ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/opus/opus.h'): return '/usr/local/include/opus/opus.h';
-        return None;
+        return pkg_config_builtin("opus");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/opus/opus.h"): return True;
-        return False;
+        return pkg_config_exists("opus");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --with-pic".format(prefix));

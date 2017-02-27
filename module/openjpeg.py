@@ -5,10 +5,12 @@ class openjpeg:
     dirname = "openjpeg-2.1.2" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libopenjpeg" ]
 
+    def has_builtin(self):
+        return pkg_config_builtin("libopenjp2");
+
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/bin/opj_compress"): return True;
-        return False;
+        return pkg_config_exists("libopenjp2");
 
     def configure(self, prefix):
         cwd = os.getcwd();

@@ -7,13 +7,11 @@ class vpx:
     ffmpeg_opts = [ "--enable-libvpx" ]
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/vpx/vp8.h'): return '/usr/local/include/vpx/vp8.h';
-        return None;
+        return pkg_config_builtin("vpx");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/vpx/vp8.h"): return True;
-        return False;
+        return pkg_config_exists("vpx");
 
     def configure(self, prefix):
         runcmd("./configure --prefix={} --enable-shared --enable-pic".format(prefix));

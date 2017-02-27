@@ -7,13 +7,11 @@ class x265:
     ffmpeg_opts = [ "--enable-libx265" ];
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/x265.h'): return '/usr/local/include/x265.h';
-        return None;
+        return pkg_config_builtin("x265");
 
     def skip(self, prefix, force):
         if force: return False;
-        if file_exist(prefix + "/include/x265.h"): return True;
-        return False;
+        return pkg_config_exists("x265");
 
     def configure(self, prefix):
         cwd = os.getcwd();

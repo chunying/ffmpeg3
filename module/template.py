@@ -14,11 +14,13 @@ class RENAME:
 
     def has_builtin(self):
         #if file_exist('/usr/local/include/xxx.h'): return '/usr/local/include/xxx.h';
+        #return pkg_config_builtin("pkg-config-pkg-name");
         return None;
 
     def skip(self, prefix, force):
         if force: return False;
         #if file_exist(prefix + "/include/xxx/xxx.h"): return True;
+        #return pkg_config_exists("pkg-config-pkg-name");
         return False;
 
     def configure(self, prefix):
