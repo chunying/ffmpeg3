@@ -1,8 +1,8 @@
 
 class ffmpeg3:
-    name = "ffmpeg 3.2.2"
+    name = "ffmpeg 3.2.4"
     proto = "http"
-    url = "http://ffmpeg.org/releases/ffmpeg-3.2.2.tar.bz2"
+    url = "http://ffmpeg.org/releases/ffmpeg-3.2.4.tar.bz2"
     dirname = "" # leave empty to auto guess
 
     def skip(self, prefix, force):
