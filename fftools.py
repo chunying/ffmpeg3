@@ -172,8 +172,11 @@ def download(pkg):
             return fname;
     # regular file
     cachename = "cached/" + fname;
-    if file_exist(cachename): return cachename;
-    runcmd("wget -P ./cached {}".format(pkg.url));
+    if hasattr(pkg, 'outname'): cachename = "cached/" + pkg.outname;
+    if file_exist(cachename):
+        st = os.stat(cachename);
+        if st.st_size > 0: return cachename;
+    runcmd("wget -O {} {}".format(cachename, pkg.url));
     # verify checksum
     sha1 = "";
     if hasattr(pkg, 'sha1'): sha1 = pkg.sha1.strip();
