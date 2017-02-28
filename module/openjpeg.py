@@ -2,6 +2,7 @@
 class openjpeg:
     name = "openjpeg 2.1.2"
     url = "https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz"
+    outname = "openjpeg-2.1.2.tar.gz"
     dirname = "openjpeg-2.1.2" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libopenjpeg" ]
 

@@ -2,6 +2,7 @@
 class wavpack:
     name = "WavPack 5.0.0"
     url = "https://github.com/dbry/WavPack/archive/5.0.0.tar.gz"
+    outname = "wavpack-5.0.0.tar.gz"
     dirname = "WavPack-5.0.0"
     ffmpeg_opts = [ "--enable-libwavpack" ]
 

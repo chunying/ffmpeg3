@@ -7,6 +7,7 @@ class RENAME:
     url = ""
     dirname = "" # leave empty to auto guess
     # optional fields
+    outname = ""# use a customized output name
     proto = ""  # http (default), ftp, git, or null
     sha1 = ""   # remove or leave empty if unknown
     md5 = ""    # remove or leave empty if unknown
