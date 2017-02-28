@@ -8,7 +8,7 @@ Python FFmpeg build scripts
 - Python3 future package: pip3 install future
 - Compilers: gcc, g++
 - make and cmake
-- m4, autoconf, libtool
+- m4, autoconf, libtool, unzip
 - freetype6-dev (libfrei0r)
 - libfontconfig1-dev (libass)
 
