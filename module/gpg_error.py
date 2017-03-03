@@ -10,7 +10,12 @@ class gpg_error:
         return False;
 
     def configure(self, prefix):
-        runcmd("./configure --prefix={}".format(prefix));
+        param = ""
+        msys = msys_sysname();
+        if msys != None:
+            param = "--build {} --host {}".format(msys, msys);
+            print(yellow("### Configure with additional parameters '{}'".format(param)));
+        runcmd("./configure --prefix={} {}".format(prefix, param));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
