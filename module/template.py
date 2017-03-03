@@ -33,6 +33,7 @@ class RENAME:
     def install(self, prefix):
         runcmd("make install");
 
+#sysdeps.append(("", None));
 deps.append(RENAME());
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
