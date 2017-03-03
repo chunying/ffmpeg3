@@ -11,8 +11,10 @@ class ffmpeg3:
 
     # this is a special configuration for ffmpeg3!
     def configure(self, prefix, opts):
-        optstr = " ".join(opts);
-        runcmd("./configure --prefix={}".format(prefix) + " " +  optstr);
+        param = "";
+        if msys_sysname() != None: param = "--target-os=mingw32 ";
+        optstr = param + " ".join(opts);
+        runcmd("./configure --prefix={} {}".format(prefix, optstr));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
