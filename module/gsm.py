@@ -6,6 +6,10 @@ class gsm:
     dirname = "gsm-1.0-pl16" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-libgsm" ]
 
+    def has_builtin(self):
+        t = test_compile(["gsm.h"], ["gsm"]);
+        return t if t != False else None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/gsm.h"): return True;

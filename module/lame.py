@@ -6,10 +6,8 @@ class lame:
     ffmpeg_opts = [ "--enable-libmp3lame" ]
 
     def has_builtin(self):
-        if file_exist('/usr/include/lame/lame.h'): return "/usr/include/lame/lame.h";
-        if file_exist('/usr/local/include/lame/lame.h'): return "/usr/local/include/lame/lame.h";
-        if file_exist('/opt/local/include/lame/lame.h'): return "/opt/local/include/lame/lame.h";
-        return None;
+        t = test_compile(['lame/lame.h'], ['mp3lame']);
+        return t if t != False else None;
 
     def skip(self, prefix, force):
         if force: return False;

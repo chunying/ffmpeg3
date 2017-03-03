@@ -6,8 +6,8 @@ class xvid:
     ffmpeg_opts = [ "--enable-libxvid" ];
 
     def has_builtin(self):
-        if file_exist('/usr/local/include/xvid.h'): return '/usr/local/include/xvid.h';
-        return None;
+        t = test_compile(['xvid.h'], ['xvidcore']);
+        return t if t != False else None;
 
     def skip(self, prefix, force):
         if force: return False;
