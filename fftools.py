@@ -4,6 +4,7 @@ import sys
 import os
 import platform
 import subprocess
+import tempfile
 
 all_modules = [ "yasm", "nasm", "gpg_error", "gcrypt",
             "sdl2", "sdl2_ttf",
@@ -156,6 +157,24 @@ def sysdeps_check(sysdeps):
             continue;
         # TODO: compare version
     return True
+
+def test_compile(headers, libs):
+    test = "";
+    for h in headers: test = test + "#include <{}>\n".format(h);
+    test = test + "int main() { return 0; }\n";
+    f = tempfile.mkstemp(suffix=".c");
+    filename = f[1];
+    os.write(f[0], bytes(test, 'utf-8'));
+    os.close(f[0]);
+    ldflags = "";
+    for l in libs: ldflags = ldflags + " -l" + l;
+    cmd = "gcc {} {}".format(filename, ldflags);
+    if runcmd_noquit(cmd) != 0:
+        print(yellow("*** Compile failed: {}, {}".format(headers, ldflags)));
+        os.unlink(filename);
+        return False;
+    os.unlink(filename);
+    return headers;
 
 def verify_checksum(fn, checksum, alg):
     m = None;
