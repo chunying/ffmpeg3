@@ -13,12 +13,7 @@ class gcrypt:
         return False;
 
     def configure(self, prefix):
-        param = ""
-        msys = msys_sysname();
-        if msys != None:
-            param = "--build {} --host {}".format(msys, msys);
-            print(yellow("### Configure with additional parameters '{}'".format(param)));
-        runcmd("./configure --prefix={} {}".format(prefix, param));
+        runcmd("./configure --prefix={}".format(prefix));
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
