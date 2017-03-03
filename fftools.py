@@ -118,7 +118,11 @@ def runcmd_output(cmd):
     return out.decode('utf-8').strip();
 
 def pkg_config_reset():
+    msys = msys_sysname();
     p = "/opt/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig/:/usr/lib/pkgconfig";
+    if msys != None:
+        if msys[:5] == "x86_64": p = "/mingw64/lib/pkgconfig:" + p;
+        else: p = "/mingw32/lib/pkgconfig:" + p;
     os.environ["PKG_CONFIG_PATH"] = p;
     return p;
 
