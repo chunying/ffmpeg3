@@ -14,7 +14,10 @@ class live555:
         runcmd("mv -f config.macosx config.macosx.OLD");
         runcmd("sed -e 's,^COMPILE_OPTS.*$,& -fPIC,' config.linux.OLD > config.linux");
         runcmd("sed -e 's,^COMPILE_OPTS.*$,& -fPIC,' config.macosx.OLD > config.macosx");
-        runcmd("./genMakefiles `uname -s | tr A-Z a-z | sed -e 's,darwin,macosx,'`");
+        if msys_sysname() == None:
+            runcmd("./genMakefiles `uname -s | tr A-Z a-z | sed -e 's,darwin,macosx,'`");
+        else:
+            runcmd("./genMakefiles mingw");
 
     def make(self, prefix, opts):
         runcmd("make {}".format(opts));
