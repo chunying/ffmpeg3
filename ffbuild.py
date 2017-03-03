@@ -8,6 +8,7 @@ from fftools import *
 from past.builtins import execfile
 
 DEFAULT_PREFIX = "/usr/local/ffmpeg3";
+sysdeps = [];       # store required system deps
 deps = [];          # store inscance of activated modules
 modules = [];       # store activated modules
 make_opts = "-j10"; # make options
@@ -22,10 +23,6 @@ else:                             prefix = DEFAULT_PREFIX;
 os.environ["FFMPEG3"] = prefix;
 os.environ["PATH"] = prefix + "/bin:" + os.environ["PATH"];
 pkg_config_setup(prefix);
-
-# check fundamental system-wide dependencies
-sysdeps = [ ("gnutls", None), ("libssl", None) ]
-if sysdeps_check(sysdeps) == False: sys.exit(1);
 
 modules = all_modules; # all_modules defined in tools.py
 
@@ -59,9 +56,15 @@ else:                dump_modules("Available modules: ", all_modules);
 if len(rebuild) > 0: dump_modules("Rebuild modules: ", rebuild);
 
 # start build and install
+sysdeps.append(("gnutls", None));
+sysdeps.append(("libssl", None));
+
 for m in modules:
     execfile("module/{}.py".format(m));
 execfile("module/ffmpeg3.py");
+
+# check fundamental system-wide dependencies
+if sysdeps_check(sysdeps) == False: sys.exit(1);
 
 create_dir("./cached");
 create_dir("./build");

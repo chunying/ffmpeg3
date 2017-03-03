@@ -21,6 +21,7 @@ class libass:
     def install(self, prefix):
         runcmd("make install");
 
+sysdeps.append(("harfbuzz", None));
 deps.append(libass());
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
