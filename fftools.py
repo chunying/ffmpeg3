@@ -2,6 +2,7 @@ import hashlib
 import errno
 import sys
 import os
+import platform
 import subprocess
 
 all_modules = [ "yasm", "nasm", "gpg_error", "gcrypt",
@@ -53,6 +54,12 @@ def dump_modules(msg, mods):
     print(highlight(msg), end='');
     print(" ".join(mods));
     print(ok("### {} module(s) activated".format(len(mods))));
+
+def msys_sysname():
+    if platform.system().lower()[:4] != "msys": return None;
+    bits = 32;
+    if platform.machine() == "x86_64": bits = 64;
+    return "{}-w{}-mingw32".format(platform.machine(), bits);
 
 def guess_dirname(fn):
     fn = os.path.basename(fn);
