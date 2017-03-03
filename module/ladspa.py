@@ -19,6 +19,7 @@ class ladspa:
         print(info("*** No need to run make"));
 
     def install(self, prefix):
+        runcmd("mkdir -p {}/include".format(prefix));
         f = open("{}/include/ladspa.h".format(prefix), "wt");
         f.write("""/* ladspa.h
 
