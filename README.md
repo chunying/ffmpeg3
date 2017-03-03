@@ -9,6 +9,7 @@ Python FFmpeg build scripts
 - Compilers: gcc, g++
 - make and cmake
 - m4, autoconf, libtool, unzip
+- gnutls, openssl, gpg-error, and libgcrypt (development headers)
 - freetype6-dev (libfrei0r)
 - libfontconfig1-dev (libass)
 
