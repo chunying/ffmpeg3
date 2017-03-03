@@ -162,18 +162,20 @@ def test_compile(headers, libs):
     test = "";
     for h in headers: test = test + "#include <{}>\n".format(h);
     test = test + "int main() { return 0; }\n";
-    f = tempfile.mkstemp(suffix=".c");
-    filename = f[1];
-    os.write(f[0], bytes(test, 'utf-8'));
-    os.close(f[0]);
+    fout = tempfile.mkstemp(suffix=".exe");
+    os.close(fout[0]);
+    fsrc = tempfile.mkstemp(suffix=".c");
+    os.write(fsrc[0], bytes(test, 'utf-8'));
+    os.close(fsrc[0]);
     ldflags = "";
     for l in libs: ldflags = ldflags + " -l" + l;
-    cmd = "gcc {} {}".format(filename, ldflags);
+    cmd = "gcc -o {} {} {}".format(fout[1], fsrc[1], ldflags);
     if runcmd_noquit(cmd) != 0:
         print(yellow("*** Compile failed: {}, {}".format(headers, ldflags)));
-        os.unlink(filename);
+        os.unlink(fsrc[1]);
         return False;
-    os.unlink(filename);
+    os.unlink(fsrc[1]);
+    os.unlink(fout[1]);
     return headers;
 
 def verify_checksum(fn, checksum, alg):
