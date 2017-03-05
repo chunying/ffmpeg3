@@ -7,6 +7,10 @@ class ladspa:
     dirname = "ladspa.h" # leave empty to auto guess
     ffmpeg_opts = [ "--enable-ladspa" ]
 
+    def has_builtin(self):
+        t = test_compile(["ladspa.h"], []);
+        return t if t != False else None;
+
     def skip(self, prefix, force):
         if force: return False;
         if file_exist(prefix + "/include/ladspa.h"): return True;
