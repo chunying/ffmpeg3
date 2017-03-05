@@ -6,7 +6,7 @@ import platform
 import subprocess
 import tempfile
 
-all_modules = [ "yasm", "nasm", "gpg_error", "gcrypt",
+all_modules = [ "yasm", "nasm", "gpg_error", "gcrypt", "opencl",
             "sdl2", "sdl2_ttf",
             "ladspa", "frei0r", "fribidi", "harfbuzz", "libass", "caca", "gsm", "modplug",
             "rtmp",
@@ -46,6 +46,7 @@ Options:
     -h, --help                 Show this message
     --prefix [prefix]          Specify prefix directory
     --modules [module[,...]]   Build and install selected modules
+    --disable [module[,...]]   Do not build selected modules
     --make [options]           Additional make options
     --force                    Rebuild all modules
     --rebuild [module[,...]]   Rebuild selected modules
@@ -169,7 +170,7 @@ def test_compile(headers, libs):
     os.close(fsrc[0]);
     ldflags = "";
     for l in libs: ldflags = ldflags + " -l" + l;
-    cmd = "gcc -o {} {} {}".format(fout[1], fsrc[1], ldflags);
+    cmd = "gcc -o {} {} {} > /dev/null 2>&1".format(fout[1], fsrc[1], ldflags);
     if runcmd_noquit(cmd) != 0:
         print(yellow("*** Compile failed: {}, {}".format(headers, ldflags)));
         os.unlink(fsrc[1]);

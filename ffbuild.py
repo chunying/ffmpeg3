@@ -31,7 +31,7 @@ print(highlight("Python FFmpeg build script: use -h option to see more options")
 opts = []
 args = []
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "h", ["help", "rebuild=", "prefix=", "modules=", "make=", "force"]);
+    opts, args = getopt.getopt(sys.argv[1:], "h", ["help", "rebuild=", "prefix=", "modules=", "disable=", "make=", "force"]);
 except getopt.GetoptError as e:
     print(error("Bad option: " + str(e)));
     usage();
@@ -49,6 +49,12 @@ for x in opts:
     elif optname == "--make":    make_opts = optarg;
     elif optname == "--modules": modules = optarg.split(",");
     elif optname == "--rebuild": rebuild = optarg.split(",");
+    elif optname == "--disable":
+        xx = optarg.split(",");
+        for x in xx:
+            while x in modules:
+                print(yellow("*** Module '{}' disabled".format(x)));
+                modules.remove(x);
 
 print(info("prefix [{}], make [{}], force={}".format(prefix, make_opts, "true" if force else "false")));
 if len(modules) > 0: dump_modules("Activated modules: ", modules);
