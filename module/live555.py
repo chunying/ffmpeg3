@@ -1,7 +1,7 @@
 
 class live555:
-    name = "live555 (2016.01.26)"
-    url = "http://www.live555.com/liveMedia/public/live.2017.01.26.tar.gz"
+    name = "live555 (2017.07.18)"
+    url = "http://www.live555.com/liveMedia/public/live.2017.07.18.tar.gz";
     dirname = "live" # leave empty to auto guess
 
     def skip(self, prefix, force):
