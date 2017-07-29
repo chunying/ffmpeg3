@@ -9,7 +9,7 @@ Python FFmpeg build scripts
 - Compilers: gcc, g++
 - make and cmake
 - m4, autoconf, libtool, unzip
-- gnutls, openssl, gpg-error, and libgcrypt (development headers)
+- gnutls, openssl, gpg-error, libgcrypt, and harfbuzz (development headers)
 - freetype6-dev (libfrei0r)
 - libfontconfig1-dev (libass)
 
@@ -29,4 +29,8 @@ Python FFmpeg build scripts
 # Note
 
 - If you are working with MSYS2, install msys/python3 instead of those in mingw\* repositories
+
+# On Mac
+
+- `brew install gnutls harfbuzz libtool automake autoconf`
 
