@@ -31,7 +31,7 @@ print(highlight("Python FFmpeg build script: use -h option to see more options")
 opts = []
 args = []
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "h", ["help", "rebuild=", "prefix=", "modules=", "disable=", "make=", "force"]);
+    opts, args = getopt.getopt(sys.argv[1:], "hv", ["help", "version", "rebuild=", "prefix=", "modules=", "disable=", "make=", "force"]);
 except getopt.GetoptError as e:
     print(error("Bad option: " + str(e)));
     usage();
@@ -43,6 +43,14 @@ for x in opts:
     if optname == "-h" or optname == "--help":
         usage();
         dump_modules("Available modules:\n", all_modules);
+        sys.exit(0);
+    elif optname == "-v" or optname == "--version":
+        for m in modules:
+            execfile("module/{}.py".format(m));
+        for m in deps:
+            print(m.name);
+        execfile("module/ffmpeg3.py");
+        print(ffmpeg3().name);
         sys.exit(0);
     elif optname == "--prefix":  prefix = optarg;
     elif optname == "--force":   force = True;

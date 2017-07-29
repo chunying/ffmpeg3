@@ -44,6 +44,7 @@ def usage():
     print("""
 Options:
     -h, --help                 Show this message
+    -v, --version              Show package version
     --prefix [prefix]          Specify prefix directory
     --modules [module[,...]]   Build and install selected modules
     --disable [module[,...]]   Do not build selected modules
